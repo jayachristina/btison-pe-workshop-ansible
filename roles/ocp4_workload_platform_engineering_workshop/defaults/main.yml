@@ -231,3 +231,30 @@ ocp4_workload_platform_engineering_workshop_rhdh_helm_chart: redhat-developer-hu
 ocp4_workload_platform_engineering_workshop_rhdh_helm_revision: main
 
 ocp4_workload_platform_engineering_workshop_rhdh_psql_password: password
+
+
+# ------------------------------------------------
+# Parasol
+# ------------------------------------------------
+
+ocp4_workload_platform_engineering_workshop_parasol_argo_application_name: parasol
+
+ocp4_workload_platform_engineering_workshop_parasol_argo_application_namespace: openshift-gitops
+ocp4_workload_platform_engineering_workshop_namespace_prefix: parasol
+
+# OCP4 Authentication:
+ocp4_workload_authentication_htpasswd_user_password: openshift
+ocp4_workload_authentication_htpasswd_user_base: user
+ocp4_workload_authentication_htpasswd_user_count: 1
+
+# Shared Users
+ocp4_workload_platform_engineering_workshop_user_count: "{{ ocp4_workload_authentication_htpasswd_user_count }}"
+ocp4_workload_platform_engineering_workshop_user_prefix: "{{ ocp4_workload_authentication_htpasswd_user_base }}"
+
+ocp4_workload_platform_engineering_workshop_application_repo: https://github.com/jayachristina/pe-workshop-parasol-helm.git
+ocp4_workload_platform_engineering_workshop_application_repo_tag: main
+ocp4_workload_platform_engineering_workshop_application_repo_path_parasol: parasol
+
+
+ocp4_workload_platform_engineering_workshop_rhbk_realm: parasol
+ocp4_workload_platform_engineering_workshop_rhbk_web_gateway_client: parasol-web-gateway
