@@ -1,16 +1,14 @@
-{% for __user in r_platform_engineering_workshop_users %}
----
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: {{ ocp4_workload_platform_engineering_workshop_parasol_argo_application_name }}-{{ __user }}
+  name: {{ ocp4_workload_platform_engineering_workshop_parasol_argo_application_name }}
   namespace: {{ ocp4_workload_platform_engineering_workshop_parasol_argo_application_namespace }}
   finalizers:
   - resources-finalizer.argocd.argoproj.io/foreground
 spec:
   destination:
     name: ""
-    namespace: {{ r_platform_engineering_workshop_parasol_namespace | replace("user",__user) }}
+    namespace: {{ r_platform_engineering_workshop_parasol_namespace }}
     server: 'https://kubernetes.default.svc'
   project: default
   syncPolicy:
@@ -35,9 +33,8 @@ spec:
 
         parasol-web:
           sso:
-            url: "https://{{ ocp4_workload_platform_engineering_workshop_rhbk_host }}.{{ r_openshift_subdomain }}/realms/{{ ocp4_workload_platform_engineering_workshop_rhbk_realm }}-{{ __user }}"
+            url: "https://{{ ocp4_workload_platform_engineering_workshop_rhbk_host }}.{{ r_openshift_subdomain }}/realms/{{ ocp4_workload_platform_engineering_workshop_rhbk_realm }}"
             client: {{ ocp4_workload_platform_engineering_workshop_rhbk_web_gateway_client }}
-            logoutUri: https://parasol-web-{{ r_platform_engineering_workshop_parasol_namespace | replace("user",__user) }}.{{ r_openshift_subdomain }}/home
+            logoutUri: https://parasol-web-{{ r_platform_engineering_workshop_parasol_namespace }}.{{ r_openshift_subdomain }}/home
             logLevel: "2"
 
-{% endfor %}

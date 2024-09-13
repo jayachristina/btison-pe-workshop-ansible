@@ -5,9 +5,7 @@
     resource_definition: "{{ lookup('template', 'parasol/namespace.yaml.j2') }}"
   vars:
     r_platform_engineering_workshop_namespaces:
-      - name: "{{ ocp4_workload_platform_engineering_workshop_namespace_prefix }}-user"
-        managedByArgo: ""
-      - name: "{{ ocp4_workload_platform_engineering_workshop_namespace_prefix }}-mw-user"
+      - name: "{{ ocp4_workload_platform_engineering_workshop_parasol_namespace_prefix }}"
         managedByArgo: ""
   retries: 10
   delay: 30
@@ -18,9 +16,7 @@
     resource_definition: "{{ lookup('template', 'parasol/rolebinding.yaml.j2') }}"
   vars:
     r_platform_engineering_workshop_bindings:
-      - namespace: "{{ ocp4_workload_platform_engineering_workshop_namespace_prefix }}-user"
-        role: "admin"
-      - namespace: "{{ ocp4_workload_platform_engineering_workshop_namespace_prefix }}-mw-user"
+      - namespace: "{{ ocp4_workload_platform_engineering_workshop_parasol_namespace_prefix }}"
         role: "admin"
   retries: 10
   delay: 30
@@ -30,5 +26,4 @@
     state: present
     definition: "{{ lookup('template', 'parasol/parasol-application.yaml.j2') }}"
   vars:
-    r_platform_engineering_workshop_parasol_namespace: "{{ ocp4_workload_platform_engineering_workshop_namespace_prefix }}-user"
-    r_platform_engineering_workshop_parasol_mw_namespace: "{{ ocp4_workload_platform_engineering_workshop_namespace_prefix }}-mw-user"
+    r_platform_engineering_workshop_parasol_namespace: "{{ ocp4_workload_platform_engineering_workshop_parasol_namespace_prefix }}"

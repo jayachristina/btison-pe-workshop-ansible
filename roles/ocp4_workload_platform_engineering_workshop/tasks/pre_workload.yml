@@ -22,16 +22,6 @@
   ansible.builtin.set_fact:
     r_openshift_subdomain: "{{ r_openshift_ingress_controller.resources[0].status.domain }}"
 
-- name: Common password
-  ansible.builtin.set_fact:
-    common_password: "{{ lookup('ansible.builtin.password', '/tmp/passwordfile', chars=['ascii_letters'], length=8) }}"
-
-- name: Create usernames
-  ansible.builtin.set_fact:
-    r_platform_engineering_workshop_users: |
-       {{ r_platform_engineering_workshop_users | default([]) + [ocp4_workload_platform_engineering_workshop_user_prefix + item | string] }}
-  loop: "{{ range(1, ((ocp4_workload_platform_engineering_workshop_user_count | int) + 1)) | list }}"
-
 # Leave these as the last tasks in the playbook
 # ---------------------------------------------
 

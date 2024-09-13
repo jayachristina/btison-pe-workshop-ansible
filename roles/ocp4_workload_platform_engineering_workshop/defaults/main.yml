@@ -161,82 +161,33 @@ ocp4_workload_platform_engineering_workshop_openshift_gitops_resource_customizat
 
 ocp4_workload_platform_engineering_workshop_openshift_gitops_ignore_differences: {}
 
-# ------------------------------------------------
-# GitLab
-# ------------------------------------------------
-
-ocp4_workload_platform_engineering_workshop_gitlab_namespace: gitlab
-
-ocp4_workload_platform_engineering_workshop_gitlab_gitops_repo: https://github.com/redhat-pe-workshop/agnosticg.git
-ocp4_workload_platform_engineering_workshop_gitlab_gitops_repo_path: charts/gitlab
-ocp4_workload_platform_engineering_workshop_gitlab_gitops_repo_tag: HEAD
-ocp4_workload_platform_engineering_workshop_gitlab_gitops_name: gitlab
-ocp4_workload_platform_engineering_workshop_gitlab_gitops_namespace: openshift-gitops
-
-ocp4_workload_platform_engineering_workshop_gitlab_config_email_address: "gitlab@example.com"
-ocp4_workload_platform_engineering_workshop_gitlab_config_email_display_name: "GitLab Admin"
-ocp4_workload_platform_engineering_workshop_gitlab_config_email_reply_to: "noreply@example.com"
-ocp4_workload_platform_engineering_workshop_gitlab_config_smtp_enabled: "false"
-ocp4_workload_platform_engineering_workshop_gitlab_config_smtp_domain: "example.com"
-ocp4_workload_platform_engineering_workshop_gitlab_config_smtp_host:
-  smtp.gitlab-{{ ocp4_workload_platform_engineering_workshop_gitlab_namespace }}.{{ r_openshift_subdomain }}
-ocp4_workload_platform_engineering_workshop_gitlab_config_smtp_port: "587"
-ocp4_workload_platform_engineering_workshop_gitlab_config_smtp_user: "gitlab"
-ocp4_workload_platform_engineering_workshop_gitlab_config_smtp_password: "gitlab"
-ocp4_workload_platform_engineering_workshop_gitlab_config_ssh_host:
-  ssh.gitlab-{{ ocp4_workload_platform_engineering_workshop_gitlab_namespace }}.{{ r_openshift_subdomain }}
-ocp4_workload_platform_engineering_workshop_gitlab_config_ssh_port: "22"
-ocp4_workload_platform_engineering_workshop_gitlab_config_root_password: "{{ common_password }}"
-ocp4_workload_platform_engineering_workshop_gitlab_config_host:
-  "gitlab-{{ ocp4_workload_platform_engineering_workshop_gitlab_namespace }}.{{ r_openshift_subdomain }}"
-ocp4_workload_platform_engineering_workshop_gitlab_config_https: "true"
-ocp4_workload_platform_engineering_workshop_gitlab_config_root_email: "root@example.com"
-ocp4_workload_platform_engineering_workshop_gitlab_config_keybase_db: "0123456789"
-ocp4_workload_platform_engineering_workshop_gitlab_config_keybase_otp: "0123456789"
-ocp4_workload_platform_engineering_workshop_gitlab_config_keybase_secret: "0123456789"
-
-ocp4_workload_platform_engineering_workshop_gitlab_db_user_name: gitlab
-ocp4_workload_platform_engineering_workshop_gitlab_db_password: passw0rd
-ocp4_workload_platform_engineering_workshop_gitlab_db_name: gitlab_production
-
-ocp4_workload_platform_engineering_workshop_gitlab_users_count: "{{ num_users | default(1) }}"
-ocp4_workload_platform_engineering_workshop_gitlab_users_password: "{{ common_password }}"
-
-ocp4_workload_platform_engineering_workshop_gitlab_import_repos: []
 
 # ------------------------------------------------
-# Red Hat Build Of Keycloak
+# Red Hat build of Keycloak realm for Parasol
 # ------------------------------------------------
+
 
 ocp4_workload_platform_engineering_workshop_rhbk_application_namespace: openshift-gitops
 ocp4_workload_platform_engineering_workshop_rhbk_application_name: keycloak
 ocp4_workload_platform_engineering_workshop_rhbk_namespace: keycloak
-ocp4_workload_platform_engineering_workshop_rhbk_gitops_repo: https://github.com/btison/pe-workshop-helm.git
+ocp4_workload_platform_engineering_workshop_rhbk_gitops_repo: https://github.com/redhat-pe-workshop/pe-workshop-parasol-helm.git
 ocp4_workload_platform_engineering_workshop_rhbk_gitops_repo_tag: main
-ocp4_workload_platform_engineering_workshop_rhbk_gitops_repo_path: keycloak
+ocp4_workload_platform_engineering_workshop_rhbk_gitops_repo_path: parasol-keycloak
 
+ocp4_workload_platform_engineering_workshop_rhbk_cr_name: rhbk
 ocp4_workload_platform_engineering_workshop_rhbk_external_access: false
 ocp4_workload_platform_engineering_workshop_rhbk_host: sso
+ocp4_workload_platform_engineering_workshop_rhbk_max_time_to_wait: 600000
 
-ocp4_workload_platform_engineering_workshop_rhbk_realm_backstage_name: backstage
-# ------------------------------------------------
-# Red Hat Developer Hub
-# ------------------------------------------------
-
-ocp4_workload_platform_engineering_workshop_rhdh_argo_application_name: backstage
-ocp4_workload_platform_engineering_workshop_rhdh_argo_application_namespace: openshift-gitops
-ocp4_workload_platform_engineering_workshop_rhdh_namespace: backstage
-
-ocp4_workload_platform_engineering_workshop_rhdh_helm_repo: https://github.com/btison/pe-workshop-helm.git
-ocp4_workload_platform_engineering_workshop_rhdh_helm_chart: redhat-developer-hub
-ocp4_workload_platform_engineering_workshop_rhdh_helm_revision: main
-
-ocp4_workload_platform_engineering_workshop_rhdh_psql_password: password
+ocp4_workload_platform_engineering_workshop_rhbk_realm: parasol
+ocp4_workload_platform_engineering_workshop_rhbk_web_gateway_client: parasol-web-gateway
 
 
 # ------------------------------------------------
 # Parasol
 # ------------------------------------------------
+
+ocp4_workload_platform_engineering_workshop_parasol_namespace_prefix: parasol-insurance
 
 ocp4_workload_platform_engineering_workshop_parasol_argo_application_name: parasol
 
@@ -252,10 +203,9 @@ ocp4_workload_authentication_htpasswd_user_count: 1
 ocp4_workload_platform_engineering_workshop_user_count: "{{ ocp4_workload_authentication_htpasswd_user_count }}"
 ocp4_workload_platform_engineering_workshop_user_prefix: "{{ ocp4_workload_authentication_htpasswd_user_base }}"
 
-ocp4_workload_platform_engineering_workshop_application_repo: https://github.com/jayachristina/pe-workshop-parasol-helm.git
+ocp4_workload_platform_engineering_workshop_application_repo: https://github.com/redhat-pe-workshop/pe-workshop-parasol-helm.git
 ocp4_workload_platform_engineering_workshop_application_repo_tag: main
 ocp4_workload_platform_engineering_workshop_application_repo_path_parasol: parasol
 
 
-ocp4_workload_platform_engineering_workshop_rhbk_realm: parasol
-ocp4_workload_platform_engineering_workshop_rhbk_web_gateway_client: parasol-web-gateway
+ocp4_workload_platform_engineering_workshop_rhbk_realm_parasol_name: parasol
