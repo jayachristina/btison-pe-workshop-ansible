@@ -22,6 +22,9 @@
   ansible.builtin.set_fact:
     _ocp4_workload_platform_engineering_workshop_gitlab_root_token: "{{ r_root_token.resources[0].data.token | b64decode }}"
 
+- name: Install Object Bucket 
+  ansible.builtin.include_tasks: objectbucket.yml
+
 - name: Install RHDH Application
   kubernetes.core.k8s:
     state: present

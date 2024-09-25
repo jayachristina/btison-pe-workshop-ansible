@@ -219,6 +219,8 @@ ocp4_workload_platform_engineering_workshop_gitlab_import_repos:
     repo:
       - name: template-quarkus-simple
         url: https://github.com/btison/rhdh-template-quarkus-simple.git
+      - name: template-quarkus-simple-techdocs
+        url: https://github.com/jayachristina/rhdh-template-quarkus-simple-techdocs.git
       - name: catalog
         url: https://github.com/btison/rhdh-catalog.git
   - name: development
@@ -293,3 +295,5 @@ ocp4_workload_platform_engineering_workshop_rhdh_locations:
     file: org.yaml
     rules:
       allow: Group, User
+
+aws_region: eu-central-1

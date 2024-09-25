@@ -18,6 +18,11 @@
 - name: Install Red Hat Developer Hub
   ansible.builtin.include_tasks: redhat_developer_hub.yml
 
+- name: Setup Gitlab dependencies
+  include_tasks:
+    file: ./setup_gitlab_runner.yml
+    
+
 - name: Print Common Password
   agnosticd_user_info:
     msg: "{{ item }}"

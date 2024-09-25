@@ -1,0 +1,41 @@
+---
+    
+- name: Create an object bucket claim resource for techdocs
+  kubernetes.core.k8s:
+    state: present
+    definition: "{{ lookup('template', 'object-bucket-claim.yml.j2') | from_yaml }}"
+
+
+- name: Retrieve s3 bucket details
+  kubernetes.core.k8s_info:
+    api_version: objectbucket.io/v1alpha1
+    kind: ObjectBucketClaim
+    name: backstage-bucket-claim
+    namespace: "{{ ocp4_workload_platform_engineering_workshop_gitlab_namespace }}"
+  register: r_bucket_claim
+  until:
+  - r_bucket_claim is defined
+  - r_bucket_claim.resources is defined
+  - r_bucket_claim.resources | length > 0
+
+- name: Retrieve bucket secret
+  kubernetes.core.k8s_info:
+    api_version: v1
+    kind: Secret
+    name: backstage-bucket-claim
+    namespace: "{{ ocp4_workload_platform_engineering_workshop_gitlab_namespace }}"
+  register: r_bucket_secret
+  retries: 120
+  delay: 10
+  until:
+  - r_bucket_secret is defined
+  - r_bucket_secret.resources is defined
+  - r_bucket_secret.resources | length > 0
+
+- name: Extract S3 Details
+  set_fact:
+    ocp4_workload_platform_engineering_workshop_s3_bucket_name: "{{ r_bucket_claim.resources[0].spec.bucketName }}"
+    ocp4_workload_platform_engineering_workshop_s3_bucket_region: "{{ aws_region }}"
+    ocp4_workload_platform_engineering_workshop_s3_bucket_endpoint: "https://s3-openshift-storage.{{ r_openshift_subdomain }}"
+    ocp4_workload_platform_engineering_workshop_s3_bucket_aws_access_key_id: "{{ r_bucket_secret.resources[0].data.AWS_ACCESS_KEY_ID | b64decode}}"
+    ocp4_workload_platform_engineering_workshop_s3_bucket_aws_secret_access_key: "{{ r_bucket_secret.resources[0].data.AWS_SECRET_ACCESS_KEY | b64decode}}"
