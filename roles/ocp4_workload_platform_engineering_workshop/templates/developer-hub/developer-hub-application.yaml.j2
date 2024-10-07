@@ -42,6 +42,9 @@ spec:
                   package: ./dynamic-plugins/dist/backstage-plugin-techdocs
                 - disabled: false
                   package: ./dynamic-plugins/dist/backstage-plugin-tech-radar
+                - package: ./dynamic-plugins/dist/roadiehq-scaffolder-backend-argocd-dynamic
+                  disabled: false
+                
 
           upstream:
             postgresql:
@@ -94,6 +97,17 @@ spec:
                       region: {{ ocp4_workload_platform_engineering_workshop_s3_bucket_region }}
                       s3ForcePathStyle: true
                     type: awsS3
+
+
+                argocd:
+                  appLocatorMethods:
+                    - type: 'config'
+                      instances:
+                        - name: main
+                          url: 	https://{{ ocp4_workload_platform_engineering_workshop_rhdh_gitops_name }}-server-{{ ocp4_workload_platform_engineering_workshop_rhdh_gitops_namespace }}.{{ r_openshift_subdomain }}
+                          username: admin
+                          password: {{ ocp4_workload_platform_engineering_workshop_rhdh_gitops_password }}
+
 
               extraContainers:
                 - name: oauth2-proxy

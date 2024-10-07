@@ -20,6 +20,11 @@ ocp4_workload_platform_engineering_workshop_openshift_gitops_operator_catalogsou
 ocp4_workload_platform_engineering_workshop_openshift_gitops_operator_catalog_snapshot_image: ""
 ocp4_workload_platform_engineering_workshop_openshift_gitops_operator_catalog_snapshot_image_tag: ""
 
+ocp4_workload_platform_engineering_workshop_openshift_gitops_operator_config:
+  env:
+    - name: ARGOCD_CLUSTER_CONFIG_NAMESPACES
+      value: '{{ ocp4_workload_platform_engineering_workshop_rhdh_gitops_namespace }},openshift-gitops'
+
 ocp4_workload_platform_engineering_workshop_openshift_gitops_setup_cluster_admin: true
 
 ocp4_workload_platform_engineering_workshop_openshift_gitops_enable_route: true
@@ -162,6 +167,17 @@ ocp4_workload_platform_engineering_workshop_openshift_gitops_resource_customizat
 ocp4_workload_platform_engineering_workshop_openshift_gitops_ignore_differences: {}
 
 # ------------------------------------------------
+# OpenShift Pipelines
+# ------------------------------------------------
+
+ocp4_workload_platform_engineering_workshop_openshift_pipelines_application_namespace: openshift-gitops
+ocp4_workload_platform_engineering_workshop_openshift_pipelines_application_name: openshift-pipelines
+ocp4_workload_platform_engineering_workshop_openshift_pipelines_namespace: openshift-operators
+ocp4_workload_platform_engineering_workshop_openshift_pipelines_gitops_repo: https://github.com/btison/pe-workshop-helm.git
+ocp4_workload_platform_engineering_workshop_openshift_pipelines_gitops_repo_tag: openshift-pipelines
+ocp4_workload_platform_engineering_workshop_openshift_pipelines_gitops_repo_path: openshift-pipelines
+
+# ------------------------------------------------
 # NooBaa
 # ------------------------------------------------
 
@@ -172,6 +188,7 @@ ocp4_workload_platform_engineering_workshop_noobaa_gitops_repo: https://github.c
 ocp4_workload_platform_engineering_workshop_noobaa_gitops_repo_tag: noobaa
 ocp4_workload_platform_engineering_workshop_noobaa_gitops_repo_path: noobaa
 
+ocp4_workload_platform_engineering_workshop_noobaa_name: noobaa
 
 # ------------------------------------------------
 # GitLab
@@ -283,12 +300,52 @@ ocp4_workload_platform_engineering_workshop_quay_application_namespace: openshif
 ocp4_workload_platform_engineering_workshop_quay_application_name: quay
 ocp4_workload_platform_engineering_workshop_quay_namespace: quay-registry
 ocp4_workload_platform_engineering_workshop_quay_gitops_repo: https://github.com/btison/pe-workshop-helm.git
-ocp4_workload_platform_engineering_workshop_quay_gitops_repo_tag: quay
+ocp4_workload_platform_engineering_workshop_quay_gitops_repo_tag: quay-vault
 ocp4_workload_platform_engineering_workshop_quay_gitops_repo_path: quay
 
 ocp4_workload_platform_engineering_workshop_quay_registry_host: "quay.{{ r_openshift_subdomain }}"
 ocp4_workload_platform_engineering_workshop_quay_admin_user: quayadmin
 ocp4_workload_platform_engineering_workshop_quay_admin_user_password: "{{ common_password }}"
+
+# ------------------------------------------------
+# Vault
+# ------------------------------------------------
+
+ocp4_workload_platform_engineering_workshop_vault_application_namespace: openshift-gitops
+ocp4_workload_platform_engineering_workshop_vault_application_name: vault
+ocp4_workload_platform_engineering_workshop_vault_namespace: vault
+ocp4_workload_platform_engineering_workshop_vault_gitops_repo: https://github.com/btison/agnosticg.git
+ocp4_workload_platform_engineering_workshop_vault_gitops_repo_tag: vault
+ocp4_workload_platform_engineering_workshop_vault_gitops_repo_path: charts/hashicorp-vault
+
+ocp4_workload_platform_engineering_workshop_vault_name: vault
+
+ocp4_workload_platform_engineering_workshop_vault_auth_namespace: default
+
+# ------------------------------------------------
+# External Secrets
+# ------------------------------------------------
+
+ocp4_workload_platform_engineering_workshop_external_secrets_application_namespace: openshift-gitops
+ocp4_workload_platform_engineering_workshop_external_secrets_application_name: external-secrets
+ocp4_workload_platform_engineering_workshop_external_secrets_namespace: external-secrets
+ocp4_workload_platform_engineering_workshop_external_secrets_gitops_repo: https://github.com/btison/pe-workshop-helm.git
+ocp4_workload_platform_engineering_workshop_external_secrets_gitops_repo_tag: external-secrets
+ocp4_workload_platform_engineering_workshop_external_secrets_gitops_repo_path: external-secrets
+
+# ------------------------------------------------
+# RHDH GitOps
+# ------------------------------------------------
+
+ocp4_workload_platform_engineering_workshop_rhdh_gitops_application_namespace: openshift-gitops
+ocp4_workload_platform_engineering_workshop_rhdh_gitops_application_name: rhdh-gitops
+ocp4_workload_platform_engineering_workshop_rhdh_gitops_namespace: rhdh-gitops
+ocp4_workload_platform_engineering_workshop_rhdh_gitops_gitops_repo: https://github.com/btison/pe-workshop-helm.git
+ocp4_workload_platform_engineering_workshop_rhdh_gitops_gitops_repo_tag: rhdh-gitops
+ocp4_workload_platform_engineering_workshop_rhdh_gitops_gitops_repo_path: gitops
+
+ocp4_workload_platform_engineering_workshop_rhdh_gitops_name: rhdh-gitops
+ocp4_workload_platform_engineering_workshop_rhdh_gitops_password: "{{ common_password }}"
 
 # ------------------------------------------------
 # Red Hat Developer Hub
