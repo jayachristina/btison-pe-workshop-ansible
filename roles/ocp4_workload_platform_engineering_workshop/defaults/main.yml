@@ -221,6 +221,10 @@ ocp4_workload_platform_engineering_workshop_gitlab_import_repos:
         url: https://github.com/btison/rhdh-template-quarkus-simple.git
       - name: template-quarkus-simple-techdocs
         url: https://github.com/jayachristina/rhdh-template-quarkus-simple-techdocs.git
+      - name: parasol-techdocs
+        url: https://github.com/redhat-pe-workshop/parasol-techdocs.git
+      - name: rhdh-software-templates
+        url: https://github.com/redhat-pe-workshop/rhdh-software-templates.git
       - name: catalog
         url: https://github.com/btison/rhdh-catalog.git
   - name: development
@@ -232,6 +236,16 @@ ocp4_workload_platform_engineering_workshop_gitlab_templates:
     branch: main
     templates:
       - template.yaml
+  - group: rhdh
+    project: template-quarkus-simple-techdocs
+    branch: main
+    templates:
+      - template.yaml
+  - group: rhdh
+    project: rhdh-software-templates
+    branch: main
+    templates:
+      - add-config-info-gitlab/templates.yaml
   - group: rhdh
     project: catalog
     branch: main

@@ -1,5 +1,11 @@
 ---
-    
+- name: Create a k8s namespace
+  kubernetes.core.k8s:
+    name: "{{ ocp4_workload_platform_engineering_workshop_rhdh_namespace }}"
+    api_version: v1
+    kind: Namespace
+    state: present
+
 - name: Create an object bucket claim resource for techdocs
   kubernetes.core.k8s:
     state: present
@@ -11,7 +17,7 @@
     api_version: objectbucket.io/v1alpha1
     kind: ObjectBucketClaim
     name: backstage-bucket-claim
-    namespace: "{{ ocp4_workload_platform_engineering_workshop_gitlab_namespace }}"
+    namespace: "{{ ocp4_workload_platform_engineering_workshop_rhdh_namespace }}"
   register: r_bucket_claim
   until:
   - r_bucket_claim is defined
@@ -23,7 +29,7 @@
     api_version: v1
     kind: Secret
     name: backstage-bucket-claim
-    namespace: "{{ ocp4_workload_platform_engineering_workshop_gitlab_namespace }}"
+    namespace: "{{ ocp4_workload_platform_engineering_workshop_rhdh_namespace }}"
   register: r_bucket_secret
   retries: 120
   delay: 10

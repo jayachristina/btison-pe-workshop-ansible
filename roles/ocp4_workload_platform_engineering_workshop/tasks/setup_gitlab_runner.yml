@@ -79,31 +79,7 @@
     definition: "{{ lookup('template', 'techdocs/gitlab-runner-techdocs.yml.j2' ) | from_yaml }}"
 
 
-- name: Retrieve bucket config
-  kubernetes.core.k8s_info:
-    api_version: v1
-    kind: ConfigMap
-    name: backstage-bucket-claim
-    namespace: "{{ ocp4_workload_platform_engineering_workshop_gitlab_namespace }}"
-  register: r_bucket_config
-  retries: 120
-  delay: 10
-  until:
-  - r_bucket_config is defined
-  - r_bucket_config.resources is defined
-  - r_bucket_config.resources | length > 0
 
-- name: Retrieve s3 bucket route
-  kubernetes.core.k8s_info:
-    api_version: route.openshift.io/v1
-    kind: Route
-    name: s3
-    namespace: openshift-storage
-  register: r_s3_route
-  until:
-  - r_s3_route is defined
-  - r_s3_route.resources is defined
-  - r_s3_route.resources | length > 0
 
 - name: Create CI/CD Variables
   ansible.builtin.uri:
